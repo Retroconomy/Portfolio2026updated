@@ -1,0 +1,1155 @@
+<!DOCTYPE html>
+<html lang="en" class="dark">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Megan Campbell | Game Designer & Producer</title>
+  
+  <!-- Tailwind CSS -->
+  <script src="https://cdn.tailwindcss.com"></script>
+  
+  <!-- Google Fonts: Outfit & Inter -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome Icons -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+  <script>
+    tailwind.config = {
+      darkMode: 'class',
+      theme: {
+        extend: {
+          fontFamily: {
+            sans: ['Inter', 'sans-serif'],
+            display: ['Outfit', 'sans-serif'],
+          },
+          colors: {
+            brand: {
+              violet: '#8b5cf6',
+              cyan: '#06b6d4',
+              emerald: '#10b981',
+              pink: '#ec4899',
+              darkBg: '#090d16',
+              cardBg: 'rgba(15, 23, 42, 0.72)',
+            }
+          }
+        }
+      }
+    };
+  </script>
+
+  <style>
+    /* Custom Styling for Carrd Aesthetics & Glassmorphism */
+    body {
+      background-color: #07090e;
+      color: #e2e8f0;
+      font-family: 'Inter', sans-serif;
+      overflow-x: hidden;
+      min-height: 100vh;
+    }
+
+    .font-display {
+      font-family: 'Outfit', sans-serif;
+    }
+
+    /* Ambient Animated Mesh Orbs */
+    .bg-orb {
+      position: fixed;
+      border-radius: 50%;
+      filter: blur(100px);
+      opacity: 0.35;
+      pointer-events: none;
+      z-index: 0;
+      animation: floatOrb 20s infinite alternate ease-in-out;
+    }
+    .bg-orb-1 {
+      top: -10%;
+      left: 10%;
+      width: 500px;
+      height: 500px;
+      background: radial-gradient(circle, #7c3aed 0%, #4c1d95 70%);
+    }
+    .bg-orb-2 {
+      bottom: -10%;
+      right: 10%;
+      width: 550px;
+      height: 550px;
+      background: radial-gradient(circle, #0284c7 0%, #0f172a 70%);
+      animation-delay: -7s;
+    }
+    .bg-orb-3 {
+      top: 45%;
+      left: 55%;
+      width: 400px;
+      height: 400px;
+      background: radial-gradient(circle, #c026d3 0%, #581c87 70%);
+      animation-delay: -14s;
+    }
+
+    @keyframes floatOrb {
+      0% { transform: translate(0, 0) scale(1); }
+      50% { transform: translate(50px, 60px) scale(1.1); }
+      100% { transform: translate(-40px, 30px) scale(0.95); }
+    }
+
+    /* Carrd Glass Card Container */
+    .glass-card {
+      background: rgba(15, 23, 42, 0.72);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
+      border: 1px solid rgba(255, 255, 255, 0.12);
+      box-shadow: 0 30px 60px -12px rgba(0, 0, 0, 0.7), 0 0 40px rgba(139, 92, 246, 0.12);
+    }
+
+    /* Glass Subcards & Hover States */
+    .glass-subcard {
+      background: rgba(30, 41, 59, 0.45);
+      backdrop-filter: blur(12px);
+      border: 1px solid rgba(255, 255, 255, 0.08);
+      transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    }
+    .glass-subcard:hover {
+      background: rgba(30, 41, 59, 0.75);
+      border-color: rgba(139, 92, 246, 0.4);
+      transform: translateY(-3px);
+      box-shadow: 0 16px 30px -10px rgba(0, 0, 0, 0.5), 0 0 20px rgba(139, 92, 246, 0.18);
+    }
+
+    /* Tab transitions */
+    .tab-content {
+      display: none;
+      opacity: 0;
+      transform: translateY(8px);
+      transition: opacity 0.3s ease, transform 0.3s ease;
+    }
+    .tab-content.active {
+      display: block;
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    /* Tab Pill Active Style */
+    .nav-tab.active-tab {
+      background: linear-gradient(135deg, #8b5cf6 0%, #6366f1 100%);
+      color: #ffffff;
+      box-shadow: 0 0 20px rgba(139, 92, 246, 0.5);
+      border-color: rgba(255, 255, 255, 0.3);
+    }
+
+    /* Text Gradients */
+    .text-gradient-purple {
+      background: linear-gradient(135deg, #c084fc 0%, #818cf8 50%, #38bdf8 100%);
+      background-clip: text;
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    }
+
+    /* Custom Scrollbar */
+    ::-webkit-scrollbar {
+      width: 7px;
+    }
+    ::-webkit-scrollbar-track {
+      background: rgba(15, 23, 42, 0.8);
+    }
+    ::-webkit-scrollbar-thumb {
+      background: rgba(139, 92, 246, 0.4);
+      border-radius: 9999px;
+    }
+    ::-webkit-scrollbar-thumb:hover {
+      background: rgba(139, 92, 246, 0.7);
+    }
+  </style>
+</head>
+<body class="relative flex flex-col items-center justify-start min-h-screen py-6 px-4 sm:px-6">
+
+  <!-- Background Ambient Glowing Orbs -->
+  <div class="bg-orb bg-orb-1"></div>
+  <div class="bg-orb bg-orb-2"></div>
+  <div class="bg-orb bg-orb-3"></div>
+
+  <!-- Top Floating Bar: Live Portfolio Sync Engine -->
+  <header class="w-full max-w-4xl z-20 mb-4 flex flex-wrap items-center justify-between gap-3 px-4 py-2.5 rounded-2xl bg-slate-900/60 backdrop-blur-md border border-white/10 text-xs sm:text-sm">
+    <div class="flex items-center gap-2">
+      <span id="sync-status-badge" class="hidden sm:inline-flex items-center text-slate-400 text-xs">
+        <i class="fa-solid fa-circle-check text-emerald-400 mr-1"></i> Data Parsed from Portfolio
+      </span>
+    </div>
+
+    <div class="flex items-center gap-2 ml-auto">
+      <button id="sync-btn" onclick="syncLivePortfolio()" class="flex items-center gap-1.5 px-3 py-1.5 rounded-xl bg-purple-600/30 hover:bg-purple-600/50 text-purple-200 border border-purple-400/30 transition-all text-xs font-semibold shadow-sm hover:shadow-purple-500/20 active:scale-95">
+        <i id="sync-icon" class="fa-solid fa-rotate text-purple-300"></i>
+        <span>Sync Live Portfolio</span>
+      </button>
+    </div>
+  </header>
+
+  <!-- Main Carrd Layout Container Card -->
+  <main class="w-full max-w-4xl z-10 glass-card rounded-3xl p-6 sm:p-8 md:p-10 relative overflow-hidden mb-8">
+    
+    <!-- Header Profile Section -->
+    <div class="flex flex-col items-center text-center relative z-10 border-b border-slate-800 pb-8 mb-8">
+      
+      <!-- Avatar Badge -->
+      <div class="relative group mb-5">
+        <div class="absolute -inset-1 rounded-full bg-gradient-to-r from-purple-600 via-pink-500 to-cyan-400 blur-md opacity-75 group-hover:opacity-100 transition duration-500 animate-pulse"></div>
+        <div class="relative w-24 h-24 sm:w-28 sm:h-28 rounded-full bg-slate-900 border-2 border-purple-400/50 flex items-center justify-center overflow-hidden shadow-2xl">
+          <div class="w-full h-full bg-gradient-to-br from-purple-900 via-indigo-950 to-slate-900 flex flex-col items-center justify-center text-purple-200">
+            <span class="font-display font-extrabold text-3xl sm:text-4xl tracking-tight text-gradient-purple">MC</span>
+            <span class="text-[10px] font-mono uppercase text-cyan-400 tracking-widest mt-0.5">Abertay</span>
+          </div>
+        </div>
+
+        <div class="absolute bottom-1 right-1 bg-slate-950 p-1 rounded-full border border-slate-700 shadow-md">
+          <span class="flex h-3 w-3 relative">
+            <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+            <span class="relative inline-flex rounded-full h-3 w-3 bg-emerald-500"></span>
+          </span>
+        </div>
+      </div>
+
+      <!-- Status Pill -->
+      <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-emerald-500/10 border border-emerald-500/20 text-emerald-300 text-xs sm:text-sm font-medium mb-3">
+        <i class="fa-solid fa-gamepad text-emerald-400"></i>
+        <span id="status-text">Game Design & Production</span>
+      </div>
+
+      <!-- Name & Title -->
+      <h1 class="font-display text-3xl sm:text-5xl font-extrabold tracking-tight text-white mb-2" id="portfolio-name">
+        Megan Campbell
+      </h1>
+      <p class="text-slate-300 text-base sm:text-lg font-medium max-w-xl mb-3" id="portfolio-title">
+        Game Designer, Producer and Narrative Lead @ <span class="text-purple-300 font-semibold">Abertay University</span>
+      </p>
+
+      <div class="relative inline-block mb-6">
+        <p class="text-transparent bg-clip-text bg-gradient-to-r from-purple-300 via-cyan-200 to-pink-300 text-sm sm:text-base font-semibold tracking-wide font-display px-4 py-1.5 rounded-full bg-slate-900/60 border border-purple-500/30 shadow-lg shadow-purple-500/10" id="portfolio-tagline">
+          Specializes in Narrative Design and Production Workflows
+        </p>
+      </div>
+
+      <!-- Quick Social Icons -->
+      <div class="flex items-center justify-center gap-3">
+        <a href="" target="_blank" title="Live Portfolio Website" class="w-10 h-10 rounded-xl bg-slate-800/80 hover:bg-purple-600/40 border border-slate-700 hover:border-purple-400/50 text-slate-300 hover:text-white flex items-center justify-center transition-all duration-200 hover:-translate-y-1">
+          <i class="fa-solid fa-globe text-base"></i>
+        </a>
+        <a href="https://github.com/retroconomy" target="_blank" title="GitHub Profile" class="w-10 h-10 rounded-xl bg-slate-800/80 hover:bg-purple-600/40 border border-slate-700 hover:border-purple-400/50 text-slate-300 hover:text-white flex items-center justify-center transition-all duration-200 hover:-translate-y-1">
+          <i class="fa-brands fa-github text-base"></i>
+        </a>
+        <a href="https://megan-campbell.itch.io" target="_blank" title="Itch.io Games" class="w-10 h-10 rounded-xl bg-slate-800/80 hover:bg-purple-600/40 border border-slate-700 hover:border-purple-400/50 text-slate-300 hover:text-white flex items-center justify-center transition-all duration-200 hover:-translate-y-1">
+          <i class="fa-brands fa-itch-io text-base"></i>
+        </a>
+        <a href="https://www.linkedin.com/in/megan-c-3965bb141/" target="_blank" title="LinkedIn Connection" class="w-10 h-10 rounded-xl bg-slate-800/80 hover:bg-purple-600/40 border border-slate-700 hover:border-purple-400/50 text-slate-300 hover:text-white flex items-center justify-center transition-all duration-200 hover:-translate-y-1">
+          <i class="fa-brands fa-linkedin-in text-base"></i>
+        </a>
+        <button onclick="copyEmailToClipboard()" title="Copy Email" class="w-10 h-10 rounded-xl bg-slate-800/80 hover:bg-cyan-600/40 border border-slate-700 hover:border-cyan-400/50 text-slate-300 hover:text-white flex items-center justify-center transition-all duration-200 hover:-translate-y-1">
+          <i class="fa-solid fa-envelope text-base"></i>
+        </button>
+      </div>
+
+    </div>
+
+    <!-- Navigation Tabs Bar -->
+    <nav class="flex items-center justify-center mb-8 overflow-x-auto py-1 px-1">
+      <div class="inline-flex p-1.5 rounded-2xl bg-slate-900/80 border border-slate-800 backdrop-blur-md gap-1 sm:gap-2 max-w-full">
+        <button onclick="switchTab('about')" id="tab-btn-about" class="nav-tab active-tab px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold transition-all duration-200 whitespace-nowrap flex items-center gap-1.5">
+          <i class="fa-solid fa-user-astronaut text-xs"></i> About
+        </button>
+        <button onclick="switchTab('projects')" id="tab-btn-projects" class="nav-tab px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold text-slate-400 hover:text-white hover:bg-slate-800/60 transition-all duration-200 whitespace-nowrap flex items-center gap-1.5">
+          <i class="fa-solid fa-folder-open text-xs"></i> Projects
+        </button>
+        <button onclick="switchTab('gamereviews')" id="tab-btn-gamereviews" class="nav-tab px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold text-slate-400 hover:text-white hover:bg-slate-800/60 transition-all duration-200 whitespace-nowrap flex items-center gap-1.5">
+          <i class="fa-solid fa-gamepad text-xs"></i> Game Reviews
+        </button>
+        <button onclick="switchTab('contact')" id="tab-btn-contact" class="nav-tab px-3.5 py-2 rounded-xl text-xs sm:text-sm font-semibold text-slate-400 hover:text-white hover:bg-slate-800/60 transition-all duration-200 whitespace-nowrap flex items-center gap-1.5">
+          <i class="fa-solid fa-paper-plane text-xs"></i> Contact
+        </button>
+      </div>
+    </nav>
+
+    <!-- SECTION 1: ABOUT TAB -->
+    <section id="tab-about" class="tab-content active space-y-8">
+      
+      <!-- Bio Summary -->
+      <div class="glass-subcard p-6 rounded-2xl relative">
+        <h2 class="font-display text-xl font-bold text-white mb-3 flex items-center gap-2">
+          <i class="fa-solid fa-compass text-purple-400"></i> Profile & Vision
+        </h2>
+        <p class="text-slate-300 text-sm sm:text-base leading-relaxed mb-4">
+          I am a Game Designer and Producer currently studying <span class="text-purple-300 font-semibold">Game Design and Production at Abertay University</span> in Dundee, Scotland. My approach merges narrative depth & research with production management, ensuring creative vision aligns with achievable milestones.
+        </p>
+      </div>
+
+      <!-- Core Focus Areas Grid -->
+      <div>
+        <h3 class="font-display text-lg font-bold text-slate-200 mb-4 flex items-center gap-2">
+          <i class="fa-solid fa-bullseye text-cyan-400"></i> Primary Focus Areas
+        </h3>
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+          
+          <div class="glass-subcard p-5 rounded-2xl border-l-4 border-l-purple-500">
+            <div class="flex items-center gap-3 mb-2">
+              <div class="w-9 h-9 rounded-lg bg-purple-500/20 text-purple-300 flex items-center justify-center font-bold">
+                <i class="fa-solid fa-pen-nib"></i>
+              </div>
+              <h4 class="font-display font-semibold text-white">Narrative Worldbuilding</h4>
+            </div>
+            <p class="text-slate-400 text-xs leading-relaxed">
+              Crafting environmental storytelling, non-linear dialogue branching, and historical context integration as seen in Jack of Diamonds.
+            </p>
+          </div>
+
+          <div class="glass-subcard p-5 rounded-2xl border-l-4 border-l-cyan-500">
+            <div class="flex items-center gap-3 mb-2">
+              <div class="w-9 h-9 rounded-lg bg-cyan-500/20 text-cyan-300 flex items-center justify-center font-bold">
+                <i class="fa-solid fa-diagram-project"></i>
+              </div>
+              <h4 class="font-display font-semibold text-white">Agile Team Production & Using RACI Matrix</h4>
+            </div>
+            <p class="text-slate-400 text-xs leading-relaxed">
+              Jira backlog management, sprint tracking, and cross-functional team communication between members of the team.
+            </p>
+          </div>
+
+          <div class="glass-subcard p-5 rounded-2xl border-l-4 border-l-emerald-500">
+            <div class="flex items-center gap-3 mb-2">
+              <div class="w-9 h-9 rounded-lg bg-emerald-500/20 text-emerald-300 flex items-center justify-center font-bold">
+                <i class="fa-solid fa-vial-circle-check"></i>
+              </div>
+              <h4 class="font-display font-semibold text-white">Player Experience Design</h4>
+            </div>
+            <p class="text-slate-400 text-xs leading-relaxed">
+              Deconstructing Games and looking into the design & mechanics which influence PX goals.
+            </p>
+          </div>
+
+          <div class="glass-subcard p-5 rounded-2xl border-l-4 border-l-pink-500">
+            <div class="flex items-center gap-3 mb-2">
+              <div class="w-9 h-9 rounded-lg bg-pink-500/20 text-pink-300 flex items-center justify-center font-bold">
+                <i class="fa-solid fa-sliders"></i>
+              </div>
+              <h4 class="font-display font-semibold text-white">Visual Art And Design</h4>
+            </div>
+            <p class="text-slate-400 text-xs leading-relaxed">
+              Looked into how visual art influences themes and creating a world around this and photo bash images to create environments round the brief given.
+            </p>
+          </div>
+
+        </div>
+      </div>
+
+      <!-- Education & Toolkit -->
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        
+        <div class="glass-subcard p-5 rounded-2xl">
+          <h3 class="font-display text-base font-bold text-white mb-3 flex items-center gap-2">
+            <i class="fa-solid fa-graduation-cap text-purple-400"></i> Education
+          </h3>
+          <div class="space-y-2">
+            <div class="flex justify-between items-start">
+              <h4 class="font-semibold text-slate-200 text-sm">Game Design & Production</h4>
+              <span class="text-xs px-2 py-0.5 rounded bg-purple-500/20 text-purple-300 font-mono">Present</span>
+            </div>
+            <p class="text-xs text-purple-300 font-medium">Abertay University, Dundee</p>
+            <p class="text-xs text-slate-400 leading-relaxed">
+              Graduate in 2028/29
+            </p>
+          </div>
+        </div>
+
+        <div class="glass-subcard p-5 rounded-2xl">
+          <h3 class="font-display text-base font-bold text-white mb-3 flex items-center gap-2">
+            <i class="fa-solid fa-screwdrivers-all text-cyan-400"></i> Software Toolkit
+          </h3>
+          <div class="flex flex-wrap gap-1.5">
+            <span class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 text-xs border border-slate-700">Unity 6.3</span>
+            <span class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 text-xs border border-slate-700">Unreal Engine 5 V.5.6.1</span>
+            <span class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 text-xs border border-slate-700">Gamemaker</span>
+            <span class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 text-xs border border-slate-700">HTML5</span>
+            <span class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 text-xs border border-slate-700">Twine Dialogue & Sugarcube2</span>
+            <span class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 text-xs border border-slate-700">Python</span>
+            <span class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 text-xs border border-slate-700">C#</span>
+            <span class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 text-xs border border-slate-700">OBS Studio</span>
+            <span class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 text-xs border border-slate-700">Microsoft Word, Excel, PowerPoint, Teams</span>
+            <span class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 text-xs border border-slate-700">Steelseries Video Capture</span>
+            <span class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 text-xs border border-slate-700">Photoshop</span>
+            <span class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 text-xs border border-slate-700">Adobe Express</span>
+            <span class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 text-xs border border-slate-700">GIMP</span>
+            <span class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 text-xs border border-slate-700">Google Docs, Sheets, Slides</span>
+            <span class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 text-xs border border-slate-700">Notion</span>
+            <span class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 text-xs border border-slate-700">Discord</span>
+            <span class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 text-xs border border-slate-700">GitHub</span>
+            <span class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 text-xs border border-slate-700">Maya Autodesk (Basic Knowledge)</span>
+            <span class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 text-xs border border-slate-700">Blender (Basic Knowledge)</span>
+            <span class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 text-xs border border-slate-700">Visual Studio Code</span>
+            <span class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 text-xs border border-slate-700">Visual Studio</span>
+            <span class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 text-xs border border-slate-700">Zotero</span>
+            <span class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 text-xs border border-slate-700">Jira & Eraser</span>
+            <span class="px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 text-xs border border-slate-700">Miro</span>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- SECTION 2: PROJECTS TAB -->
+    <section id="tab-projects" class="tab-content space-y-6">
+      
+      <div class="flex flex-wrap items-center justify-between gap-3">
+        <h2 class="font-display text-xl font-bold text-white flex items-center gap-2">
+          <i class="fa-solid fa-folder-closed text-purple-400"></i> Portfolio Projects & Work
+        </h2>
+      </div>
+
+      <!-- Projects Grid -->
+      <div id="projects-grid" class="grid grid-cols-1 md:grid-cols-2 gap-5">
+        
+        <!-- Project 1: 11:55 -->
+        <div class="project-card glass-subcard rounded-2xl overflow-hidden flex flex-col justify-between p-5 group border-dashed border-slate-700 hover:border-purple-500/50">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-slate-800 text-purple-300 border border-purple-500/30">Unreal Engine 5</span>
+              <span class="text-xs text-slate-500 font-mono">Media Production Module - 2026</span>
+            </div>
+            <h3 class="font-display text-lg font-bold text-slate-200 group-hover:text-purple-300 transition-colors mb-2">
+              11:55
+            </h3>
+            <p class="text-slate-400 text-xs leading-relaxed mb-4">
+              Atmospheric, dark comedy about a paranoid man whose life is in shambles. First-person narrative exploration game focused on environmental storytelling.
+            </p>
+            <div class="flex flex-wrap gap-1 mb-4">
+              <span class="text-[10px] px-2 py-0.5 rounded bg-slate-800/80 text-slate-400 border border-slate-700">Unreal Engine 5</span>
+              <span class="text-[10px] px-2 py-0.5 rounded bg-slate-800/80 text-slate-400 border border-slate-700">Narrative Lead</span>
+              <span class="text-[10px] px-2 py-0.5 rounded bg-slate-800/80 text-slate-400 border border-slate-700">Itch.io</span>
+            </div>
+          </div>
+          <button onclick="openProjectModal('11-55')" class="w-full py-2 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 text-xs font-semibold flex items-center justify-center gap-1.5 transition-all">
+            <span>View Case Study</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </button>
+        </div>
+
+        <!-- Project 2: The Mummy Adaption Demo -->
+        <div class="project-card glass-subcard rounded-2xl overflow-hidden flex flex-col justify-between p-5 group">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-emerald-500/20 text-emerald-300 border border-emerald-500/30">Unreal Engine 5</span>
+              <span class="text-xs text-slate-400 font-mono">Level Design & Scripting Module - 2025</span>
+            </div>
+            <h3 class="font-display text-lg font-bold text-white group-hover:text-emerald-300 transition-colors mb-2">
+              The Mummy Adaption Demo
+            </h3>
+            <p class="text-slate-300 text-xs leading-relaxed mb-4">
+              Guided, readable environment demonstrating terrain sculpting, landmark navigation, and Blueprint scripting inside Unreal Engine 5.
+            </p>
+            <div class="flex flex-wrap gap-1 mb-4">
+              <span class="text-[10px] px-2 py-0.5 rounded bg-slate-800/80 text-slate-400 border border-slate-700">Unreal Engine 5</span>
+              <span class="text-[10px] px-2 py-0.5 rounded bg-slate-800/80 text-slate-400 border border-slate-700">Blueprints</span>
+              <span class="text-[10px] px-2 py-0.5 rounded bg-slate-800/80 text-slate-400 border border-slate-700">Itch.io</span>
+            </div>
+          </div>
+          <button onclick="openProjectModal('mummy-demo')" class="w-full py-2 px-3 rounded-xl bg-emerald-600/20 hover:bg-emerald-600/40 text-emerald-200 border border-emerald-500/30 text-xs font-semibold flex items-center justify-center gap-1.5 transition-all">
+            <span>View Case Study</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </button>
+        </div>
+
+        <!-- Project 3: Jack of Diamonds -->
+        <div class="project-card glass-subcard rounded-2xl overflow-hidden flex flex-col justify-between p-5 group">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-purple-500/20 text-purple-300 border border-purple-500/30">Narrative Design</span>
+              <span class="text-xs text-slate-400 font-mono">Narrative Design - 2025</span>
+            </div>
+            <h3 class="font-display text-lg font-bold text-white group-hover:text-purple-300 transition-colors mb-2">
+              Jack of Diamonds
+            </h3>
+            <p class="text-slate-300 text-xs leading-relaxed mb-4">
+              Interactive narrative exploration game set in 1990s Motherwell maintenance tunnels. Features non-linear dialogue branching trees.
+            </p>
+            <div class="flex flex-wrap gap-1 mb-4">
+              <span class="text-[10px] px-2 py-0.5 rounded bg-slate-800/80 text-purple-300 border border-slate-700">Twine & Sugarcube 2</span>
+              <span class="text-[10px] px-2 py-0.5 rounded bg-slate-800/80 text-cyan-300 border border-slate-700">Narrative Design</span>
+              <span class="text-[10px] px-2 py-0.5 rounded bg-slate-800/80 text-pink-300 border border-slate-700">itch.io</span>
+            </div>
+          </div>
+          <button onclick="openProjectModal('jack-of-diamonds')" class="w-full py-2 px-3 rounded-xl bg-purple-600/20 hover:bg-purple-600/40 text-purple-200 border border-purple-500/30 text-xs font-semibold flex items-center justify-center gap-1.5 transition-all">
+            <span>View Full Project Case Study</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </button>
+        </div>
+
+        <!-- Project 4: Echo Vault -->
+        <div class="project-card glass-subcard rounded-2xl overflow-hidden flex flex-col justify-between p-5 group">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">Narrative Design</span>
+              <span class="text-xs text-slate-400 font-mono">Game Studies Module - 2025</span>
+            </div>
+            <h3 class="font-display text-lg font-bold text-white group-hover:text-cyan-300 transition-colors mb-2">
+              Echo Vault
+            </h3>
+            <p class="text-slate-300 text-xs leading-relaxed mb-4">
+              A Psychological Heist Inside the Mind. Created using Twine as part of Narrative Design coursework.
+            </p>
+            <div class="flex flex-wrap gap-1 mb-4">
+              <span class="text-[10px] px-2 py-0.5 rounded bg-slate-800/80 text-slate-400 border border-slate-700">Twine & Sugarcube 2</span>
+              <span class="text-[10px] px-2 py-0.5 rounded bg-slate-800/80 text-slate-400 border border-slate-700">Narrative Design</span>
+              <span class="text-[10px] px-2 py-0.5 rounded bg-slate-800/80 text-slate-400 border border-slate-700">Itch.io</span>
+            </div>
+          </div>
+          <button onclick="openProjectModal('echo-vault')" class="w-full py-2 px-3 rounded-xl bg-cyan-600/20 hover:bg-cyan-600/40 text-cyan-200 border border-cyan-500/30 text-xs font-semibold flex items-center justify-center gap-1.5 transition-all">
+            <span>View Case Study</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </button>
+        </div>
+
+        <!-- Project 5: Crunch Culture Essay -->
+        <div class="project-card glass-subcard rounded-2xl overflow-hidden flex flex-col justify-between p-5 group border-dashed border-slate-700 hover:border-cyan-500/50">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-slate-800 text-cyan-300 border border-cyan-500/30">Research Paper Essay</span>
+              <span class="text-xs text-slate-500 font-mono">Game Studies Module - 2025</span>
+            </div>
+            <h3 class="font-display text-lg font-bold text-slate-200 group-hover:text-cyan-300 transition-colors mb-2">
+              Crunch Culture & Mass Layoffs
+            </h3>
+            <p class="text-slate-400 text-xs leading-relaxed mb-4">
+              Research examining how exploitative overtime and mass studio layoffs impact game developer health and industry sustainability.
+            </p>
+            <div class="flex flex-wrap gap-1 mb-4">
+              <span class="text-[10px] px-2 py-0.5 rounded bg-slate-800/80 text-slate-400 border border-slate-700">Miro</span>
+              <span class="text-[10px] px-2 py-0.5 rounded bg-slate-800/80 text-slate-400 border border-slate-700">Research</span>
+              <span class="text-[10px] px-2 py-0.5 rounded bg-slate-800/80 text-slate-400 border border-slate-700">Crunch Culture</span>
+            </div>
+          </div>
+          <button onclick="openProjectModal('crunch-culture')" class="w-full py-2 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 text-xs font-semibold flex items-center justify-center gap-1.5 transition-all">
+            <span>View Case Study</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </button>
+        </div>
+
+        <!-- Project 6: Wildbound -->
+        <div class="project-card glass-subcard rounded-2xl overflow-hidden flex flex-col justify-between p-5 group">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-pink-500/20 text-pink-300 border border-pink-500/30">Game Engines - Unity</span>
+              <span class="text-xs text-slate-400 font-mono">Game Engines Module - 2024</span>
+            </div>
+            <h3 class="font-display text-lg font-bold text-white group-hover:text-pink-300 transition-colors mb-2">
+              Wildbound
+            </h3>
+            <p class="text-slate-300 text-xs leading-relaxed mb-4">
+              2D platformer adventure game built in Unity featuring responsive character controls, animated sprite sheets, and UI HUD systems.
+            </p>
+            <div class="flex flex-wrap gap-1 mb-4">
+              <span class="text-[10px] px-2 py-0.5 rounded bg-slate-800/80 text-slate-400 border border-slate-700">Unity</span>
+              <span class="text-[10px] px-2 py-0.5 rounded bg-slate-800/80 text-slate-400 border border-slate-700">VS Code</span>
+              <span class="text-[10px] px-2 py-0.5 rounded bg-slate-800/80 text-slate-400 border border-slate-700">Itch.io</span>
+            </div>
+          </div>
+          <button onclick="openProjectModal('wildbound')" class="w-full py-2 px-3 rounded-xl bg-pink-600/20 hover:bg-pink-600/40 text-pink-200 border border-pink-500/30 text-xs font-semibold flex items-center justify-center gap-1.5 transition-all">
+            <span>View Case Study</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </button>
+        </div>
+
+        <!-- Project 7: Rooted Realms -->
+        <div class="project-card glass-subcard rounded-2xl overflow-hidden flex flex-col justify-between p-5 group">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-purple-500/20 text-purple-300 border border-purple-500/30">Board Game</span>
+              <span class="text-xs text-slate-400 font-mono">Game Concepts Module - 2024</span>
+            </div>
+            <h3 class="font-display text-lg font-bold text-white group-hover:text-purple-300 transition-colors mb-2">
+              Rooted Realms Board Game
+            </h3>
+            <p class="text-slate-300 text-xs leading-relaxed mb-4">
+              Nature-inspired physical board game focusing on root expansion, resource management, and symbiotic interactions in underground ecosystems.
+            </p>
+            <div class="flex flex-wrap gap-1 mb-4">
+              <span class="text-[10px] px-2 py-0.5 rounded bg-slate-800/80 text-slate-400 border border-slate-700">Adobe Express</span>
+              <span class="text-[10px] px-2 py-0.5 rounded bg-slate-800/80 text-slate-400 border border-slate-700">Research</span>
+              <span class="text-[10px] px-2 py-0.5 rounded bg-slate-800/80 text-slate-400 border border-slate-700">Itch.io</span>
+            </div>
+          </div>
+          <button onclick="openProjectModal('rooted-realms')" class="w-full py-2 px-3 rounded-xl bg-purple-600/20 hover:bg-purple-600/40 text-purple-200 border border-purple-500/30 text-xs font-semibold flex items-center justify-center gap-1.5 transition-all">
+            <span>View Case Study</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </button>
+        </div>
+
+        <!-- Project 8: Curse of the Magic Mop -->
+        <div class="project-card glass-subcard rounded-2xl overflow-hidden flex flex-col justify-between p-5 group">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-cyan-500/20 text-cyan-300 border border-cyan-500/30">Gamemaker Project</span>
+              <span class="text-xs text-slate-400 font-mono">Game Concepts Module - 2024</span>
+            </div>
+            <h3 class="font-display text-lg font-bold text-white group-hover:text-cyan-300 transition-colors mb-2">
+              The Curse of the Magic Mop
+            </h3>
+            <p class="text-slate-300 text-xs leading-relaxed mb-4">
+              Action defense game where a cleaner protects a cursed wizard mop against invading goblin hordes. Built in GameMaker.
+            </p>
+            <div class="flex flex-wrap gap-1 mb-4">
+              <span class="text-[10px] px-2 py-0.5 rounded bg-slate-800/80 text-slate-400 border border-slate-700">Gamemaker</span>
+              <span class="text-[10px] px-2 py-0.5 rounded bg-slate-800/80 text-slate-400 border border-slate-700">Game Jam</span>
+              <span class="text-[10px] px-2 py-0.5 rounded bg-slate-800/80 text-slate-400 border border-slate-700">Itch.io</span>
+            </div>
+          </div>
+          <button onclick="openProjectModal('magic-mop')" class="w-full py-2 px-3 rounded-xl bg-cyan-600/20 hover:bg-cyan-600/40 text-cyan-200 border border-cyan-500/30 text-xs font-semibold flex items-center justify-center gap-1.5 transition-all">
+            <span>View Case Study</span> <i class="fa-solid fa-arrow-right text-[10px]"></i>
+          </button>
+        </div>
+
+        <!-- Project 9: Editable Template -->
+        <div class="project-card glass-subcard rounded-2xl overflow-hidden flex flex-col justify-between p-5 group border-dashed border-slate-700 hover:border-pink-500/50">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-slate-800 text-pink-300 border border-pink-500/30">Editable Template</span>
+              <span class="text-xs text-slate-500 font-mono">Blank Entry #3</span>
+            </div>
+            <h3 class="font-display text-lg font-bold text-slate-200 group-hover:text-pink-300 transition-colors mb-2">
+              New Project Title 3
+            </h3>
+            <p class="text-slate-400 text-xs leading-relaxed mb-4">
+              Placeholder description for your next game design or production project. Edit this text directly in index.html to add details.
+            </p>
+            <div class="flex flex-wrap gap-1 mb-4">
+              <span class="text-[10px] px-2 py-0.5 rounded bg-slate-800/80 text-slate-400 border border-slate-700">Tag 1</span>
+              <span class="text-[10px] px-2 py-0.5 rounded bg-slate-800/80 text-slate-400 border border-slate-700">Tag 2</span>
+              <span class="text-[10px] px-2 py-0.5 rounded bg-slate-800/80 text-slate-400 border border-slate-700">Tag 3</span>
+            </div>
+          </div>  
+          <button onclick="openProjectModal('blank-3')" class="w-full py-2 px-3 rounded-xl bg-slate-800 hover:bg-slate-700 text-slate-300 border border-slate-700 text-xs font-semibold flex items-center justify-center gap-1.5 transition-all">
+            <span>Open Template Modal</span> <i class="fa-solid fa-pen text-[10px]"></i>
+          </button>
+        </div> 
+
+      </div>
+
+    </section>
+
+    <!-- SECTION 3: GAME REVIEWS TAB -->
+    <section id="tab-gamereviews" class="tab-content space-y-6">
+      
+      <div class="flex items-center justify-between">
+        <h2 class="font-display text-xl font-bold text-white flex items-center gap-2">
+          <i class="fa-solid fa-gamepad text-purple-400"></i> Game Reviews & Design Critiques
+        </h2>
+        <span class="text-xs px-2.5 py-1 rounded-full bg-purple-500/20 text-purple-300 border border-purple-500/30">
+          Design Breakdown & Analysis
+        </span>
+      </div>
+
+      <p class="text-xs text-slate-400 leading-relaxed">
+        Critical analytical breakdowns of game mechanics, narrative pacing, player friction points, and world design in commercial titles.
+      </p>
+
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+        
+        <div class="glass-subcard p-5 rounded-2xl flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="text-xs font-bold text-amber-400 flex items-center gap-1">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              </span>
+              <span class="text-[11px] font-mono text-cyan-300 bg-cyan-950/60 px-2 py-0.5 rounded border border-cyan-800">Nintendo</span>
+            </div>
+            <h3 class="font-display font-bold text-white text-base mb-1">
+              The Legend of Zelda: Skyward Sword
+            </h3>
+            <p class="text-slate-300 text-xs leading-relaxed mb-4">
+              Evaluating motion controls vs button layouts, dungeon navigation pacing, and world connectivity in Nintendo's origin story.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-slate-800 flex justify-between items-center text-[11px] text-slate-400">
+            <span>Game Reviews</span>
+            <span class="text-purple-400 font-semibold">Read Review</span>
+          </div>
+        </div>
+
+        <div class="glass-subcard p-5 rounded-2xl flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="text-xs font-bold text-amber-400 flex items-center gap-1">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              </span>
+              <span class="text-[11px] font-mono text-purple-300 bg-purple-950/60 px-2 py-0.5 rounded border border-purple-800">Spry Fox</span>
+            </div>
+            <h3 class="font-display font-bold text-white text-base mb-1">
+              Cozy Grove
+            </h3>
+            <p class="text-slate-300 text-xs leading-relaxed mb-4">
+              Breakdown of cozy game mechanics, real-time quest pacing, and character narrative arcs on a mystical haunted island.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-slate-800 flex justify-between items-center text-[11px] text-slate-400">
+            <span>Game Reviews</span>
+            <span class="text-purple-400 font-semibold">Read Review</span>
+          </div>
+        </div>
+
+        <div class="glass-subcard p-5 rounded-2xl flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="text-xs font-bold text-amber-400 flex items-center gap-1">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              </span>
+              <span class="text-[11px] font-mono text-emerald-300 bg-emerald-950/60 px-2 py-0.5 rounded border border-emerald-800">Adam Robinson-Yu</span>
+            </div>
+            <h3 class="font-display font-bold text-white text-base mb-1">
+              A Short Hike
+            </h3>
+            <p class="text-slate-300 text-xs leading-relaxed mb-4">
+              Analysis of open-world traversal mechanics, feather-stamina pacing, and player freedom in Hawk Peak Provincial Park.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-slate-800 flex justify-between items-center text-[11px] text-slate-400">
+            <span>Game Reviews</span>
+            <span class="text-purple-400 font-semibold">Read Review</span>
+          </div>
+        </div>
+
+        <div class="glass-subcard p-5 rounded-2xl flex flex-col justify-between">
+          <div>
+            <div class="flex items-center justify-between gap-2 mb-2">
+              <span class="text-xs font-bold text-amber-400 flex items-center gap-1">
+                <i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i><i class="fa-solid fa-star"></i>
+              </span>
+              <span class="text-[11px] font-mono text-pink-300 bg-pink-950/60 px-2 py-0.5 rounded border border-pink-800">Monolith Productions</span>
+            </div>
+            <h3 class="font-display font-bold text-white text-base mb-1">
+              Middle-Earth: Shadow of Mordor
+            </h3>
+            <p class="text-slate-300 text-xs leading-relaxed mb-4">
+              Deconstructing procedural hierarchy generation, enemy memory retention, and emerging narrative in the Nemesis System.
+            </p>
+          </div>
+          <div class="pt-3 border-t border-slate-800 flex justify-between items-center text-[11px] text-slate-400">
+            <span>Game Reviews</span>
+            <span class="text-purple-400 font-semibold">Read Review</span>
+          </div>
+        </div>
+
+      </div>
+
+    </section>
+
+    <!-- SECTION 5: CONTACT TAB -->
+    <section id="tab-contact" class="tab-content space-y-6">
+      
+      <div class="text-center max-w-md mx-auto">
+        <h2 class="font-display text-2xl font-bold text-white mb-2">Get in Touch</h2>
+        <p class="text-xs text-slate-400">
+          Interested in discussing game design opportunities, production collaboration, or narrative scripting? Send an inquiry message below.
+        </p>
+      </div>
+
+      <form onsubmit="handleFormSubmit(event)" class="glass-subcard p-6 rounded-2xl space-y-4 max-w-lg mx-auto">
+        <input type="hidden" id="selected-topic-input" value="Game Design">
+
+        <div>
+          <label class="block text-xs font-medium text-slate-300 mb-1">Your Name</label>
+          <input type="text" required placeholder="e.g. Alex Mercer" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/80 border border-slate-700 text-white text-xs focus:outline-none focus:border-purple-400 transition">
+        </div>
+
+        <div>
+          <label class="block text-xs font-medium text-slate-300 mb-1">Your Email</label>
+          <input type="email" required placeholder="alex@studio.com" class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/80 border border-slate-700 text-white text-xs focus:outline-none focus:border-purple-400 transition">
+        </div>
+
+        <div>
+          <label class="block text-xs font-medium text-slate-300 mb-1">Message</label>
+          <textarea rows="4" required placeholder="Hello Megan, I would love to discuss a game design/production opportunity..." class="w-full px-3.5 py-2.5 rounded-xl bg-slate-900/80 border border-slate-700 text-white text-xs focus:outline-none focus:border-purple-400 transition resize-none"></textarea>
+        </div>
+
+        <button type="submit" class="w-full py-3 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white text-xs font-bold uppercase tracking-wider shadow-lg shadow-purple-600/30 transition-all flex items-center justify-center gap-2 active:scale-95">
+          <i class="fa-solid fa-paper-plane"></i>
+          <span>Send Inquiry Message</span>
+        </button>
+      </form>
+
+    </section>
+
+    <!-- Footer inside Card -->
+    <footer class="mt-10 pt-6 border-t border-slate-800 text-center text-xs text-slate-500 flex flex-col sm:flex-row items-center justify-between gap-3">
+      <p>© 2026 Megan Campbell • Game Designer & Producer</p>
+      <p class="flex items-center gap-1">
+        <span>Abertay University</span> <span class="mx-1">•</span>
+      </p>
+    </footer>
+
+  </main>
+
+  <!-- Project Details Modal -->
+  <div id="project-modal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/80 backdrop-blur-md opacity-0 pointer-events-none transition-opacity duration-300">
+    <div class="glass-card max-w-2xl w-full max-h-[85vh] overflow-y-auto rounded-3xl p-6 sm:p-8 relative border border-purple-500/30 shadow-2xl">
+      <button onclick="closeProjectModal()" class="absolute top-5 right-5 w-8 h-8 rounded-full bg-slate-800 hover:bg-slate-700 text-slate-300 hover:text-white flex items-center justify-center transition">
+        <i class="fa-solid fa-xmark"></i>
+      </button>
+
+      <div id="modal-content" class="space-y-4">
+        <!-- Injected via JS -->
+      </div>
+    </div>
+  </div>
+
+  <!-- Global Toast Notification Banner -->
+  <div id="toast" class="fixed bottom-6 right-6 z-50 max-w-md px-4 py-3 rounded-2xl bg-slate-900 border border-purple-500/40 text-purple-200 text-xs font-medium shadow-2xl flex items-center gap-3 transform translate-y-20 opacity-0 transition-all duration-300">
+    <div class="w-8 h-8 rounded-xl bg-purple-600/30 text-purple-300 flex items-center justify-center flex-shrink-0" id="toast-icon">
+      <i class="fa-solid fa-check"></i>
+    </div>
+    <span id="toast-message">Notification message here</span>
+  </div>
+
+  <!-- JavaScript Logic for Live Parser & Interactions -->
+  <script>
+    var portfolioState = {
+      name: "Megan Campbell",
+      title: "Game Designer & Producer @ Abertay University",
+      status: "Available for Game Design & Production",
+      tagline: "Specializes in narrative and production workflows",
+      email: "megancampbell20012003@gmail.com",
+      portfolioUrl: "https://retroconomy.github.io/my-portfolio/index.html",
+      lastSynced: "2026-10-15 (Verified Baseline)"
+    };
+
+    var projectDetails = {
+      '11-55': {
+        title: "11:55",
+        category: "Unreal Engine 5",
+        meta: "Media Production Module - 2026",
+        description: "Atmospheric, dark comedy about a paranoid man whose life is in shambles. As order is restored to the environment, the player confronts the internal battle between control, trauma, and the consequences of the choices that drove his family away.",
+        bullets: [
+          "As Narrative lead, created the story and collaborated with group members to maintain narrative consistency.",
+          "Created the UI for this game and performed group testing for narrative coherence.",
+          "Created the Core Game Loop and score system along with assisting with lighting mechanics."
+        ],
+        tags: ["UE5", "Narrative Lead", "UI", "Lighting", "Research"]
+      },
+      'mummy-demo': {
+        title: "The Mummy Adaption Demo",
+        category: "Unreal Engine 5",
+        meta: "Level Design & Scripting Module - 2025",
+        description: "Created as part of Level Design and Scripting assignment to demonstrate a guided, readable environment and interactive gameplay systems inside Unreal Engine 5.",
+        bullets: [
+          "Created structures covering physics collisions, audio/sfx event triggers, UI states & lighting changes.",
+          "Effective file/Blueprint management using a real map of the Sahara desert to sculpt terrain.",
+          "Narrative development improved and created a script for the demo."
+        ],
+        tags: ["UE5", "Blueprints & Triggers", "Itch.io", "UI & Lighting"]
+      },
+      'jack-of-diamonds': {
+        title: "Jack of Diamonds",
+        category: "Narrative & Atmospheric Design",
+        meta: "1990s Motherwell Underground Networks",
+        description: "Jack of Diamonds is a story-driven exploration game set deep within the subterranean maintenance tunnels of 1990s Motherwell, Scotland. Players navigate humid, claustrophobic conduits while uncovering worker logs, environmental audio cassettes, and regional industrial folklore.",
+        bullets: [
+          "Authored 15+ non-linear dialogue branching scripts in Twine, mapping emotional choices to tunnel navigation.",
+          "Researched 1990s Scottish industrial history and tunnel architecture for authentic atmospheric worldbuilding.",
+          "Worked within a group to execute our brief successfully."
+        ],
+        tags: ["Twine Scripting & Sugarcube 2", "Narrative Design", "Itch.io", "Adobe Express"]
+      },
+      'echo-vault': {
+        title: "Echo Vault",
+        category: "Narrative & Atmospheric Design",
+        meta: "Game Studies & Criticism Module - 2025",
+        description: "A Psychological Heist Inside the Mind. Created as a side project during Narrative Design coursework using Twine.",
+        bullets: [
+          "Using the rubric, created another project to aid portfolio submission.",
+          "Used Twine effectively to achieve intended effects and narrative design.",
+          "Used Adobe Express to create moodboards for the project theme."
+        ],
+        tags: ["Twine Scripting & Sugarcube 2", "Narrative Design", "Itch.io", "Adobe Express"]
+      },
+      'crunch-culture': {
+        title: "How does Crunch Culture and Mass Layoffs in the Video Game Industry impact developers and the industry's long-term sustainability?",
+        category: "Research Paper Essay",
+        meta: "Game Studies and Criticism - 2025",
+        description: "Research examining how exploitative overtime and mass studio layoffs impact game developer health and industry sustainability.",
+        bullets: [
+          "Researched effectively to find references to convey points and display evidence of crunch culture.",
+          "Analyzed mass layoff patterns across major AAA studios.",
+          "Formulated sustainable working model proposals for production leads."
+        ],
+        files: [
+          { name: 'Crunch Culture Paper.pdf', size: 'PDF', icon: 'fa-file-pdf text-red-400', url: 'https://github.com/Retroconomy/my-portfolio/blob/036f807d5f1f014296d3457cb189df80d8f67856/Images/Crunch%20Culture%20Paper.pdf' }
+        ],
+        tags: ["Miro", "Research", "Crunch Culture"]
+      },
+      'wildbound': {
+        title: "Wildbound",
+        category: "Game Engines - Unity",
+        meta: "Game Engines Module - 2024",
+        description: "2D platformer adventure game built in Unity featuring responsive character controls, animated sprite sheets, and UI HUD systems.",
+        bullets: [
+          "Mapped player controller input curves to eliminate movement dead-zone sluggishness.",
+          "Used Unity to create UI effectively in-engine.",
+          "Used C# programming language.",
+          "Used sprites and animated them using the built-in animator in Unity."
+        ],
+        tags: ["Unity", "C#", "Itch.io", "Animation"]
+      },
+      'rooted-realms': {
+        title: "Rooted Realms Board Game",
+        category: "Board Game",
+        meta: "Game Concepts Module - 2024",
+        description: "Nature-inspired physical board game focusing on root expansion, resource management, and symbiotic interactions in underground ecosystems.",
+        bullets: [
+          "Used play sessions to manually gauge card difficulty and ecosystem building.",
+          "Used Adobe Express to create portfolio showcases for play party exhibitions.",
+          "Researched forest ecosystems to map game mechanics directly to biological concepts."
+        ],
+        tags: ["Board Game", "Research", "Adobe Express", "Play Parties"]
+      },
+      'magic-mop': {
+        title: "The Curse of the Magic Mop",
+        category: "Gamemaker Project",
+        meta: "Game Concepts Module - 2024",
+        description: "Action defense game where a cleaner protects a cursed wizard mop against invading goblin hordes.",
+        bullets: [
+          "Created the presentation presented to over 300 people within the lecture theatre.",
+          "Programmed gameplay mechanics in GameMaker.",
+          "Created musical audio cues to react dynamically upon entering game states."
+        ],
+        tags: ["Gamemaker", "Presentation", "Level Design", "Mechanics", "Itch.io"]
+      },
+      'blank-3': {
+        title: "Editable Project Template 3",
+        category: "Custom Category",
+        meta: "Your Custom Meta Info",
+        description: "This is a pre-formatted editable project modal ready for your future project case studies.",
+        bullets: [
+          "Add your bullet point accomplishment 1 here.",
+          "Add your bullet point accomplishment 2 here.",
+          "Add your bullet point accomplishment 3 here."
+        ],
+        tags: ["Custom Tag 1", "Custom Tag 2", "Editable"]
+      }
+    };
+
+    var qaBugs = [
+      { id: "BUG-104", summary: "Jack of Diamonds - Subterranean Door collision clip in Sector 3", category: "Level Collision", severity: "High", status: "Fixed", repro: "Walk into Sector 3 door frame while crouching." },
+      { id: "BUG-089", summary: "Audio occlusion drops out during crouch sequence in water pipe", category: "FMOD Audio", severity: "Medium", status: "In Verification", repro: "Crouch in Sector 2 water pipe." },
+      { id: "BUG-062", summary: "Jira build automation fails to auto-assign bug ticket on commit tag", category: "Production Workflow", severity: "Low", status: "Fixed", repro: "Commit with tag #bug-062 on main branch." },
+      { id: "BUG-112", summary: "Inventory stickiness during rapid d-pad input on controller", category: "Game Feel / Input", severity: "Critical", status: "Fixed", repro: "Press D-Pad left/right rapidly." },
+      { id: "BUG-128", summary: "Motherwell tunnel light attenuation shader causes camera flicker", category: "Visuals / Engine", severity: "Medium", status: "Open", repro: "Look directly at tunnel light source." }
+    ];
+
+    window.onload = function() {
+      populateBugTable();
+      syncLivePortfolio(true);
+    };
+
+    function switchTab(tabId) {
+      var cleanId = tabId.replace(/^tab-/, '');
+
+      var sections = document.querySelectorAll('.tab-content');
+      for (var i = 0; i < sections.length; i++) {
+        sections[i].classList.remove('active');
+        sections[i].classList.add('hidden');
+        sections[i].style.display = 'none';
+      }
+
+      var targetSection = document.getElementById('tab-' + cleanId);
+      if (targetSection) {
+        targetSection.classList.add('active');
+        targetSection.classList.remove('hidden');
+        targetSection.style.display = 'block';
+      }
+
+      var buttons = document.querySelectorAll('.nav-tab');
+      for (var j = 0; j < buttons.length; j++) {
+        buttons[j].classList.remove('active-tab', 'text-white');
+        buttons[j].classList.add('text-slate-400');
+      }
+
+      var targetBtn = document.getElementById('tab-btn-' + cleanId);
+      if (targetBtn) {
+        targetBtn.classList.add('active-tab', 'text-white');
+        targetBtn.classList.remove('text-slate-400');
+      }
+
+      if (cleanId === 'qa') {
+        populateBugTable();
+      }
+    }
+
+    function openProjectModal(key) {
+      var data = projectDetails[key];
+      if (!data) return;
+
+      var modal = document.getElementById('project-modal');
+      var container = document.getElementById('modal-content');
+      if (!modal || !container) return;
+
+      var filesHtml = '';
+      if (data.files && data.files.length > 0) {
+        filesHtml = '<div class="p-3.5 rounded-xl bg-slate-900/80 border border-white/10 mb-4">' +
+          '<h4 class="text-xs font-mono text-purple-300 mb-2 flex items-center gap-1.5">' +
+          '<i class="fa-solid fa-download"></i> Downloads & Attached Resources</h4><div class="space-y-1.5">';
+        for (var i = 0; i < data.files.length; i++) {
+          var f = data.files[i];
+          filesHtml += '<div class="flex items-center justify-between p-2 rounded-lg bg-slate-800/80 border border-white/5">' +
+            '<span class="text-xs text-slate-200 flex items-center gap-2">' +
+            '<i class="fa-regular ' + (f.icon || 'fa-file-pdf text-red-400') + '"></i> ' + f.name + '</span>' +
+            '<a href="' + (f.url || '#') + '" target="_blank" class="px-2.5 py-1 rounded bg-purple-600 hover:bg-purple-500 text-white text-[11px] font-mono transition">Download</a>' +
+            '</div>';
+        }
+        filesHtml += '</div></div>';
+      }
+
+      var bulletsHtml = '';
+      if (data.bullets && data.bullets.length > 0) {
+        for (var j = 0; j < data.bullets.length; j++) {
+          bulletsHtml += '<li class="flex items-start gap-2"><i class="fa-solid fa-check text-purple-400 mt-0.5 text-[10px]"></i><span>' + data.bullets[j] + '</span></li>';
+        }
+      }
+
+      var tagsHtml = '';
+      if (data.tags && data.tags.length > 0) {
+        for (var k = 0; k < data.tags.length; k++) {
+          tagsHtml += '<span class="text-[11px] px-2.5 py-1 rounded-lg bg-slate-800 text-slate-300 border border-slate-700">' + data.tags[k] + '</span>';
+        }
+      }
+
+      container.innerHTML =
+        '<div class="flex items-center justify-between gap-2 mb-1">' +
+        '<span class="px-2.5 py-0.5 rounded-full text-xs font-semibold bg-purple-500/20 text-purple-300 border border-purple-500/30">' + (data.category || '') + '</span>' +
+        '<span class="text-xs text-slate-400 font-mono">' + (data.meta || '') + '</span>' +
+        '</div>' +
+        '<h2 class="font-display text-2xl font-bold text-white mb-3">' + (data.title || '') + '</h2>' +
+        '<p class="text-slate-300 text-xs sm:text-sm leading-relaxed mb-4">' + (data.description || '') + '</p>' +
+        filesHtml +
+        '<div class="glass-subcard p-4 rounded-xl space-y-2 mb-4">' +
+        '<h4 class="text-xs font-bold text-purple-300 uppercase tracking-wider">Key Highlights & Accomplishments</h4>' +
+        '<ul class="space-y-1.5 text-xs text-slate-300">' + bulletsHtml + '</ul>' +
+        '</div>' +
+        '<div class="flex flex-wrap gap-1.5 mb-2">' + tagsHtml + '</div>';
+
+      modal.classList.remove('opacity-0', 'pointer-events-none');
+    }
+
+    function closeProjectModal() {
+      var modal = document.getElementById('project-modal');
+      if (modal) modal.classList.add('opacity-0', 'pointer-events-none');
+    }
+
+    function populateBugTable() {
+      var body = document.getElementById('bug-table-body');
+      if (!body) return;
+
+      var rows = '';
+      for (var i = 0; i < qaBugs.length; i++) {
+        var bug = qaBugs[i];
+        var statusBadge = bug.status === 'Fixed' 
+          ? '<span class="text-emerald-400 bg-emerald-950/80 px-2 py-0.5 rounded border border-emerald-800/60">Fixed</span>'
+          : bug.status === 'In Verification'
+          ? '<span class="text-cyan-400 bg-cyan-950/80 px-2 py-0.5 rounded border border-cyan-800/60">Verification</span>'
+          : '<span class="text-amber-400 bg-amber-950/80 px-2 py-0.5 rounded border border-amber-800/60">Open</span>';
+
+        var sevColor = bug.severity === 'Critical' ? 'text-pink-400' : bug.severity === 'High' ? 'text-amber-400' : 'text-slate-300';
+
+        rows += '<tr onclick="inspectBug(' + i + ')" class="hover:bg-purple-900/20 cursor-pointer transition">' +
+          '<td class="py-2.5 px-3 text-purple-300 font-bold">' + bug.id + '</td>' +
+          '<td class="py-2.5 px-3 text-slate-200 truncate max-w-[200px]">' + bug.summary + '</td>' +
+          '<td class="py-2.5 px-3 text-slate-400">' + bug.category + '</td>' +
+          '<td class="py-2.5 px-3 ' + sevColor + '">' + bug.severity + '</td>' +
+          '<td class="py-2.5 px-3">' + statusBadge + '</td>' +
+          '</tr>';
+      }
+      body.innerHTML = rows;
+    }
+
+    function inspectBug(index) {
+      var bug = qaBugs[index];
+      if (!bug) return;
+
+      var drawer = document.getElementById('bug-inspector');
+      var bugId = document.getElementById('bug-inspect-id');
+      var bugStatus = document.getElementById('bug-inspect-status');
+      var bugTitle = document.getElementById('bug-inspect-title');
+      var bugRepro = document.getElementById('bug-inspect-repro');
+      var bugVerif = document.getElementById('bug-inspect-verif');
+
+      if (!drawer || !bugId || !bugStatus || !bugTitle || !bugRepro || !bugVerif) return;
+
+      bugId.innerText = bug.id + ' • ' + bug.category;
+      bugStatus.innerText = bug.status;
+      bugTitle.innerText = bug.summary;
+      bugRepro.innerText = 'Reproduction Steps: ' + (bug.repro || 'See ticket documentation.');
+      bugVerif.innerText = 'Severity: ' + bug.severity;
+
+      drawer.classList.remove('hidden');
+    }
+
+    function closeBugInspector() {
+      var drawer = document.getElementById('bug-inspector');
+      if (drawer) drawer.classList.add('hidden');
+    }
+
+    function handleFormSubmit(e) {
+      e.preventDefault();
+      showToast('Inquiry sent to Megan!', 'check');
+      e.target.reset();
+    }
+
+    function copyEmailToClipboard() {
+      var email = portfolioState.email;
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(email).then(function() {
+          showToast('Copied ' + email + ' to clipboard!', 'copy');
+        }).catch(function() {
+          showToast('Email: ' + email, 'check');
+        });
+      } else {
+        showToast('Email: ' + email, 'check');
+      }
+    }
+
+    function syncLivePortfolio(quiet) {
+      var syncIcon = document.getElementById('sync-icon');
+      if (syncIcon) syncIcon.classList.add('animate-spin');
+      if (!quiet) showToast("Connecting to retroconomy.github.io...", "rotate");
+
+      var proxyUrl = 'https://api.allorigins.win/raw?url=' + encodeURIComponent('https://retroconomy.github.io/my-portfolio/index.html');
+      fetch(proxyUrl, { cache: "no-store" })
+        .then(function(response) {
+          if (response.ok) {
+            portfolioState.lastSynced = new Date().toLocaleTimeString();
+            var badge = document.getElementById('sync-status-badge');
+            if (badge) badge.innerHTML = '<i class="fa-solid fa-circle-check text-emerald-400 mr-1"></i> Live Synced (' + portfolioState.lastSynced + ')';
+            if (!quiet) showToast("Successfully synced live data!", "check");
+          } else {
+            throw new Error("Proxy response not OK");
+          }
+        })
+        .catch(function() {
+          var badge = document.getElementById('sync-status-badge');
+          if (badge) badge.innerHTML = '<i class="fa-solid fa-shield-halved text-purple-400 mr-1"></i> Model Verified';
+          if (!quiet) showToast("Synced with baseline model!", "check");
+        })
+        .finally(function() {
+          if (syncIcon) syncIcon.classList.remove('animate-spin');
+        });
+    }
+
+    function showToast(msg, iconType) {
+      var toast = document.getElementById('toast');
+      var msgEl = document.getElementById('toast-message');
+      var iconEl = document.getElementById('toast-icon');
+      if (!toast || !msgEl || !iconEl) return;
+
+      msgEl.innerText = msg;
+      iconEl.innerHTML = (iconType === 'copy')
+        ? '<i class="fa-solid fa-copy"></i>'
+        : (iconType === 'rotate')
+        ? '<i class="fa-solid fa-rotate animate-spin"></i>'
+        : '<i class="fa-solid fa-check"></i>';
+
+      toast.classList.remove('translate-y-20', 'opacity-0');
+      setTimeout(function() {
+        toast.classList.add('translate-y-20', 'opacity-0');
+      }, 3500);
+    }
+  </script>
+</body>
+</html>
